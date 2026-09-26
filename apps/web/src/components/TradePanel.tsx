@@ -10,6 +10,7 @@ import { LIQ_LOSS_PCT, fmtAssetAmount, fmtPrice, fmtUsdt, liqPriceFor, parseUsdt
 import { Alert, Btn, Row, Skeleton, TxStatus } from "./ui";
 
 const LEVERAGE_STEPS = [1, 2, 3, 5, 10];
+const UNVERIFIED_MAX_LEVERAGE = 2;
 function TokenPill({ children }: { children: string }) {
   return (
     <span className="flex shrink-0 items-center gap-2 rounded-full bg-surface-3 py-1.5 pl-2 pr-3.5 text-lg font-semibold">
@@ -56,13 +57,16 @@ export function TradePanel({
     );
   }
 
-  // Signed-out visitors get a preview of the full 10x range.
-  const max = signedIn ? market.maxLeverage : 10;
-  const locked = signedIn && max === 0;
+  // Unverified users (and signed-out visitors) only see 2x; the full range unlocks with KYC.
+  const verified = signedIn && (market.tier > 0 || !market.kycEnforced);
+  const max = verified ? market.maxLeverage : UNVERIFIED_MAX_LEVERAGE;
+  const locked = verified && max === 0;
   const leverage = locked ? 0 : Math.min(Math.max(wantedLeverage, 1), max);
-  const steps = [...LEVERAGE_STEPS.filter((n) => n <= max), ...(LEVERAGE_STEPS.includes(max) ? [] : [max])]
-    .filter((n) => n > 0)
-    .sort((a, b) => a - b);
+  const steps = verified
+    ? [...LEVERAGE_STEPS.filter((n) => n <= max), ...(LEVERAGE_STEPS.includes(max) ? [] : [max])]
+        .filter((n) => n > 0)
+        .sort((a, b) => a - b)
+    : [UNVERIFIED_MAX_LEVERAGE];
 
   const collateral = parseUsdt(collateralInput);
   const hasAmount = collateral !== undefined && collateral > 0n;
@@ -146,12 +150,14 @@ export function TradePanel({
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted">Leverage</span>
             <span className="text-sm text-muted">
-              {signedIn ? (
+              {verified ? (
                 <>
                   Max <span className="font-semibold text-foreground">{max}x</span> for {tierName}
                 </>
+              ) : signedIn ? (
+                "Verify KYC to unlock up to 10x"
               ) : (
-                "Sign in to see your limit"
+                "Sign in and verify KYC to unlock up to 10x"
               )}
             </span>
           </div>
@@ -236,7 +242,7 @@ export function TradePanel({
               })
             }
           >
-            Approve USDT
+            Buy long ({leverage}x)
           </Btn>
         ) : (
           <Btn
@@ -255,7 +261,7 @@ export function TradePanel({
               })
             }
           >
-            Open {leverage}x long
+            Confirm
           </Btn>
         )}
       </div>
@@ -267,7 +273,7 @@ export function TradePanel({
       )}
       {needsApproval && !problem && (
         <p className="mt-2 text-center text-sm text-muted">
-          Step 1 of 2 — allow the engine to use {fmtUsdt(collateral ?? 0n)} USDT.
+          Step 1 of 2 — approve {fmtUsdt(collateral ?? 0n)} USDT, then confirm your {leverage}x long.
         </p>
       )}
       <TxStatus tx={approve} />

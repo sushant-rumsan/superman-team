@@ -52,7 +52,7 @@ export default function AuthPage() {
         <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-accent text-xl font-black text-black">
           S
         </span>
-        <h1 className="mt-5 text-2xl font-semibold tracking-tight">Welcome to Superman</h1>
+        <h1 className="mt-5 text-2xl font-semibold tracking-tight">Welcome to MarginKey Everywhere</h1>
         <p className="mt-2 text-sm text-muted">
           Sign in with Google to start margin trading. No wallet setup needed.
         </p>

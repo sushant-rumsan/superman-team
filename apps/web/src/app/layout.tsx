@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Superman Margin",
+  title: "MarginKey Everywhere",
   description: "Long-only margin trading with KYC-tiered leverage on HashKey Chain Testnet",
 };
 

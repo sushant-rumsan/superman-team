@@ -143,9 +143,9 @@ export function Header({
         <div className="flex items-center gap-2 sm:gap-6">
           <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
             <span className="grid h-7 w-7 place-items-center rounded-lg bg-accent text-sm font-black text-black">
-              S
+              M
             </span>
-            <span className="hidden sm:inline">Superman</span>
+            <span className="hidden sm:inline">MarginKey Everywhere</span>
           </Link>
           <nav className="flex items-center">
             <NavLink href="/">Trade</NavLink>
