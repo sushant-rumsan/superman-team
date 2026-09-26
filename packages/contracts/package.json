@@ -11,6 +11,10 @@
     "deploy:sepolia": "hardhat ignition deploy ignition/modules/Counter.ts --network sepolia --verify && npm run export",
     "deploy:hsk-testnet": "hardhat ignition deploy ignition/modules/Counter.ts --network hashkeyTestnet --verify && npm run export",
     "deploy:hsk": "hardhat ignition deploy ignition/modules/Counter.ts --network hashkey --verify && npm run export",
+    "deploy:margin:local": "hardhat ignition deploy ignition/modules/MarginTrading.ts --network localhost --reset && npm run export",
+    "deploy:margin:sepolia": "hardhat ignition deploy ignition/modules/MarginTrading.ts --network sepolia --verify && npm run export",
+    "deploy:margin:hsk-testnet": "hardhat ignition deploy ignition/modules/MarginTrading.ts --network hashkeyTestnet --verify && npm run export",
+    "deploy:margin:hsk": "hardhat ignition deploy ignition/modules/MarginTrading.ts --network hashkey --verify && npm run export",
     "export": "hardhat run scripts/export-contracts.ts",
     "clean": "hardhat clean"
   },

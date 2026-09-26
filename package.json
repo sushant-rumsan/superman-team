@@ -16,6 +16,10 @@
     "deploy:sepolia": "npm run deploy:sepolia -w contracts",
     "deploy:hsk-testnet": "npm run deploy:hsk-testnet -w contracts",
     "deploy:hsk": "npm run deploy:hsk -w contracts",
+    "deploy:margin:local": "npm run deploy:margin:local -w contracts",
+    "deploy:margin:sepolia": "npm run deploy:margin:sepolia -w contracts",
+    "deploy:margin:hsk-testnet": "npm run deploy:margin:hsk-testnet -w contracts",
+    "deploy:margin:hsk": "npm run deploy:margin:hsk -w contracts",
     "dev": "npm run dev -w web",
     "build": "npm run build -w web",
     "lint": "npm run lint -w web"
