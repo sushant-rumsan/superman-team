@@ -20,6 +20,8 @@
     "deploy:margin:sepolia": "npm run deploy:margin:sepolia -w contracts",
     "deploy:margin:hsk-testnet": "npm run deploy:margin:hsk-testnet -w contracts",
     "deploy:margin:hsk": "npm run deploy:margin:hsk -w contracts",
+    "deploy:margin:script": "npm run deploy:margin:script -w contracts",
+    "admin": "npm run admin -w contracts --",
     "dev": "npm run dev -w web",
     "build": "npm run build -w web",
     "lint": "npm run lint -w web"

@@ -49,16 +49,19 @@ export default function AuthPage() {
   return (
     <main className="grid min-h-[100svh] place-items-center px-6">
       <div className="w-full max-w-sm text-center">
-        <h1 className="text-2xl font-semibold">Sign in</h1>
-        <p className="mt-2 text-sm text-zinc-500">
-          Sign in with Google. That&apos;s the whole process.
+        <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-accent text-xl font-black text-black">
+          S
+        </span>
+        <h1 className="mt-5 text-2xl font-semibold tracking-tight">Welcome to Superman</h1>
+        <p className="mt-2 text-sm text-muted">
+          Sign in with Google to start margin trading. No wallet setup needed.
         </p>
 
         <button
           type="button"
           onClick={onGoogle}
           disabled={loading || !magic}
-          className="mt-8 flex h-14 w-full items-center justify-center gap-3 rounded-md border border-zinc-300 bg-transparent font-medium transition-colors hover:bg-zinc-100 disabled:cursor-default disabled:opacity-50 dark:border-zinc-700 dark:hover:bg-zinc-900"
+          className="mt-8 flex h-14 w-full items-center justify-center gap-3 rounded-2xl bg-surface-2 font-semibold transition-colors hover:bg-surface-3 disabled:cursor-default disabled:opacity-50"
         >
           {loading ? (
             <Spinner />
@@ -71,7 +74,7 @@ export default function AuthPage() {
         </button>
 
         {error && (
-          <p className="mt-4 text-sm text-red-500">
+          <p className="mt-4 text-sm text-down">
             Something went wrong. Try again.
           </p>
         )}

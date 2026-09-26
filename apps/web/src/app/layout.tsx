@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Superman Team",
-  description: "Full-stack dapp: Next.js + Hardhat + Magic on HashKey Chain",
+  title: "Superman Margin",
+  description: "Long-only margin trading with KYC-tiered leverage on HashKey Chain Testnet",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

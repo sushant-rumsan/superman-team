@@ -49,7 +49,7 @@ export default function AuthCallbackPage() {
     <main className="grid min-h-[100svh] place-items-center px-6">
       <div className="flex flex-col items-center gap-4">
         <Spinner />
-        <p className="text-sm text-zinc-500">Finishing sign-in…</p>
+        <p className="text-sm text-muted">Finishing sign-in…</p>
       </div>
     </main>
   );

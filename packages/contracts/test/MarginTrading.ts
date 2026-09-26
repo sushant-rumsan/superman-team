@@ -6,6 +6,14 @@ import { parseUnits } from "viem";
 describe("MarginTrading", async function () {
   const { viem } = await network.create();
 
+  it("mints 100,000,000 USDT to the deployer (admin)", async function () {
+    const [ownerClient] = await viem.getWalletClients();
+    const mockUSDT = await viem.deployContract("MockUSDT");
+
+    const bal = await mockUSDT.read.balanceOf([ownerClient.account.address]);
+    assert.equal(bal, parseUnits("100000000", 6));
+  });
+
   it("mints test USDT via faucet and opens a long position", async function () {
     const [ownerClient, traderClient] = await viem.getWalletClients();
 

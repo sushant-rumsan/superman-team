@@ -61,6 +61,34 @@ Sepolia is also wired up (`npm run deploy:sepolia`, needs `SEPOLIA_RPC_URL`/`SEP
 
 There's no backend/JWT layer here — Magic's own session (an iframe-backed relayer session) is the source of truth for "is this user signed in." Add a backend token exchange later if you need server-side session verification.
 
+## Deploying the margin engine
+
+`MarginEngineUSDT` has two deploy paths:
+
+- **Script** (curate-ai-contracts style — step-by-step logs, seeds the liquidity pool, writes `packages/contracts/deployedContracts.json` keyed by chain ID):
+  ```bash
+  cp packages/contracts/.env.example packages/contracts/.env   # set PRIVATE_KEY
+  NETWORK=hashkeyTestnet npm run deploy:margin:script          # or NETWORK=localhost
+  ```
+  It deploys `MockUSDT` (100,000,000 USDT minted to the deployer/admin), then `MarginEngineUSDT` (initial price $0.10 per HSK), then deposits 500,000 test USDT as liquidity. Leave `USDT_ADDRESS` empty in `.env` unless you want to reuse an existing token. On mainnet (`NETWORK=hashkey`) it refuses to deploy a mock and requires `USDT_ADDRESS`.
+- **Ignition** (`npm run deploy:margin:hsk-testnet`, etc.) — deploys the same two contracts without seeding, and feeds `npm run export` for the frontend.
+
+## Admin CLI
+
+The deployer key (`PRIVATE_KEY` in `packages/contracts/.env`) is the engine owner. Drive the market from the terminal:
+
+```bash
+npm run admin -- status
+npm run admin -- send-usdt <address> 1000
+npm run admin -- set-price 0.1        # or -10% / +10% relative to the current price
+npm run admin -- set-tier <address> 3 # 0 none, 1 = 2x, 2 = 5x, 3 = 10x
+npm run admin -- kyc on               # or off
+npm run admin -- deposit 5000         # add USDT to the liquidity pool
+npm run admin -- liquidate <address>
+```
+
+Writes are simulated first (real revert reasons) and only reported as successful once mined.
+
 ## Adding your own contract
 
 1. Add `packages/contracts/contracts/YourContract.sol` and a matching Ignition module under `ignition/modules/`.

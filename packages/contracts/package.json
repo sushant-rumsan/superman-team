@@ -15,6 +15,8 @@
     "deploy:margin:sepolia": "hardhat ignition deploy ignition/modules/MarginTrading.ts --network sepolia --verify && npm run export",
     "deploy:margin:hsk-testnet": "hardhat ignition deploy ignition/modules/MarginTrading.ts --network hashkeyTestnet --verify && npm run export",
     "deploy:margin:hsk": "hardhat ignition deploy ignition/modules/MarginTrading.ts --network hashkey --verify && npm run export",
+    "deploy:margin:script": "hardhat run scripts/deploy-margin.ts",
+    "admin": "node scripts/admin.ts",
     "export": "hardhat run scripts/export-contracts.ts",
     "clean": "hardhat clean"
   },

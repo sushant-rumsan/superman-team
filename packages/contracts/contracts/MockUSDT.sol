@@ -14,7 +14,8 @@ contract MockUSDT {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
     constructor() {
-        _mint(msg.sender, 1_000_000 * 1e6);
+        // The deployer is the admin: enough supply to seed the pool and fund traders.
+        _mint(msg.sender, 100_000_000 * 1e6);
     }
 
     function _mint(address to, uint256 amount) internal {

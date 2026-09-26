@@ -1,0 +1,8 @@
+{
+  "133": {
+    "network": "HashKey Chain Testnet",
+    "deployer": "0xdF958a47644CE25A3D5852535244e75467Ec60F5",
+    "usdt": "0x858905235ebaa2f60fbff83f716c32ee6cd0c00b",
+    "marginEngine": "0x6ef2259f9d36f40472d54f6381f81833feaa296b"
+  }
+}

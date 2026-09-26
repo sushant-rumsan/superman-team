@@ -1,26 +1,133 @@
 @import "tailwindcss";
 
+/* Soft dark, Uniswap-style: near-black canvas, layered greys, one pink accent.
+   Green / red are reserved for PnL and risk so they always mean something. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0d0d0f;
+  --foreground: #f7f7f8;
+  --surface: #131316;
+  --surface-2: #1a1a1f;
+  --surface-3: #232329;
+  --line: rgba(255, 255, 255, 0.07);
+  --muted: #8b8b96;
+  --accent: #fc72ff;
+  --green: #3ddc84;
+  --red: #ff5c5c;
+  --amber: #ffb84d;
+  --blue: #5ab0ff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-up: var(--green);
+  --color-down: var(--red);
+  --color-info: var(--blue);
+  --color-warn: var(--amber);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(60rem 28rem at 50% -8rem, rgba(252, 114, 255, 0.1), transparent 70%),
+    var(--background);
+  background-repeat: no-repeat;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: rgba(252, 114, 255, 0.3);
+}
+
+input,
+select {
+  font-variant-numeric: tabular-nums;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Leverage-style range slider: thin track, round thumb, accent-coloured fill via --fill. */
+input[type="range"].slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--accent) var(--fill, 0%),
+    var(--surface-3) var(--fill, 0%)
+  );
+  outline: none;
+}
+input[type="range"].slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 999px;
+  background: #fff;
+  border: 4px solid var(--accent);
+  cursor: pointer;
+}
+input[type="range"].slider::-moz-range-thumb {
+  height: 12px;
+  width: 12px;
+  border-radius: 999px;
+  background: #fff;
+  border: 4px solid var(--accent);
+  cursor: pointer;
+}
+input[type="range"].slider:disabled {
+  opacity: 0.4;
+}
+
+/* Re-mounted (via key) whenever the value it wraps changes. */
+@keyframes flash-in {
+  0% {
+    transform: scale(1.06);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.flash {
+  display: inline-block;
+  animation: flash-in 0.5s ease-out;
+}
+
+@keyframes pulse-ring {
+  50% {
+    box-shadow: 0 0 0 4px rgba(255, 92, 92, 0.25);
+  }
+}
+.pulse-ring {
+  animation: pulse-ring 1.4s ease-in-out infinite;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+}
+.pop-in {
+  animation: pop-in 0.14s ease-out;
 }
