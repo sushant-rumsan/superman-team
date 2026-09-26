@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+.env
+.env*.local
+*.tsbuildinfo
+
+# hardhat
+packages/contracts/artifacts/
+packages/contracts/cache/
+packages/contracts/coverage/
+packages/contracts/types/
+# local-chain deployments are throwaway; keep testnet/mainnet ones
+packages/contracts/ignition/deployments/chain-31337/

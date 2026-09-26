@@ -1,0 +1,25 @@
+{
+  "name": "contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "node": "hardhat node",
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:local": "hardhat ignition deploy ignition/modules/Counter.ts --network localhost --reset && npm run export",
+    "deploy:sepolia": "hardhat ignition deploy ignition/modules/Counter.ts --network sepolia --verify && npm run export",
+    "deploy:hsk-testnet": "hardhat ignition deploy ignition/modules/Counter.ts --network hashkeyTestnet --verify && npm run export",
+    "deploy:hsk": "hardhat ignition deploy ignition/modules/Counter.ts --network hashkey --verify && npm run export",
+    "export": "hardhat run scripts/export-contracts.ts",
+    "clean": "hardhat clean"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ignition": "^3.0.7",
+    "@nomicfoundation/hardhat-toolbox-viem": "^5.0.7",
+    "@types/node": "^22.0.0",
+    "hardhat": "^3.18.0",
+    "typescript": "~5.9.0",
+    "viem": "^2.47.6"
+  }
+}

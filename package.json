@@ -1,0 +1,23 @@
+{
+  "name": "superman-team",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22.10.0"
+  },
+  "scripts": {
+    "chain": "npm run node -w contracts",
+    "compile": "npm run compile -w contracts",
+    "test": "npm run test -w contracts",
+    "deploy:local": "npm run deploy:local -w contracts",
+    "deploy:sepolia": "npm run deploy:sepolia -w contracts",
+    "deploy:hsk-testnet": "npm run deploy:hsk-testnet -w contracts",
+    "deploy:hsk": "npm run deploy:hsk -w contracts",
+    "dev": "npm run dev -w web",
+    "build": "npm run build -w web",
+    "lint": "npm run lint -w web"
+  }
+}
